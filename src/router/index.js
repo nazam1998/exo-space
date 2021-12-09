@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from '@/store';
 Vue.use(VueRouter)
 
 const routes = [{
@@ -32,7 +32,17 @@ const routes = [{
         props: true
       },
 
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      let exist = store.destinations.find(dest => dest.id == to.params.destinationId);
+      if (exist) {
+        next()
+      } else {
+        next({
+          name: 'NotFound'
+        })
+      }
+    }
   },
   {
     path: '/crew',
@@ -51,7 +61,17 @@ const routes = [{
         props: true
       },
 
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      let exist = store.crew.find(crew => crew.id == to.params.crewId);
+      if (exist) {
+        next()
+      } else {
+        next({
+          name: 'NotFound'
+        })
+      }
+    }
   },
   {
     path: '/technology',
@@ -70,8 +90,24 @@ const routes = [{
         props: true
       },
 
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      let exist = store.technology.find(tech => tech.id == to.params.technoId);
+      if (exist) {
+        next()
+      } else {
+        next({
+          name: 'NotFound'
+        })
+      }
+    }
+
   },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import( /* webpackChunkName: "404" */ '../views/NotFound.vue')
+  }
 ]
 
 const router = new VueRouter({

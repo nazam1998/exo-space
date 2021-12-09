@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-6">
-      <h2>01 Pick your destination</h2>
+      <h2 class="mb-5">01 Pick your destination</h2>
       <img :src="require('@/assets' + destination.images.png)" alt="" />
     </div>
     <div class="col-6">

@@ -3,7 +3,7 @@
     <div id="nav">
       <img :src="require('@/assets/shared/logo.svg')" alt="" />
       <router-link to="/">00 Home</router-link>
-      <router-link to="Destination">01 Destination</router-link>
+      <router-link to="/Destination">01 Destination</router-link>
       <router-link to="/crew">02 Crew</router-link>
       <router-link to="/technology">03 Technology</router-link>
     </div>
