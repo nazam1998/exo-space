@@ -14,10 +14,13 @@
             <h1 class="my-5">{{ crews[current].name }}</h1>
             <p>{{ crews[current].bio }}</p>
             <div class="row justify-content-center">
-              <div class="col-3 btn-select" @click="current=0"></div>
-              <div class="col-3 btn-select" @click="current=1"></div>
-              <div class="col-3 btn-select" @click="current=2"></div>
-              <div class="col-3 btn-select" @click="current=3"></div>
+              <div
+                v-for="(crew, index) in crews"
+                :key="index"
+                class="col-3 btn-select"
+                :class="{'current-crew-active': current==index}"
+                @click="current = index"
+              ></div>
             </div>
           </div>
         </div>
@@ -78,6 +81,9 @@ export default {
   margin: 10px;
 }
 .btn-select:hover {
-    color: grey;
+  background-color: grey;
+}
+.current-crew-active{
+  background-color: grey;
 }
 </style>

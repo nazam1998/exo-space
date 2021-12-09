@@ -16,10 +16,14 @@
         </div>
         <div class="col-6">
           <div class="row">
-            <span class="col-1 select-planet" @click="current = 0">Moon</span>
-            <span class="col-1 select-planet" @click="current = 1">Mars</span>
-            <span class="col-1 select-planet" @click="current = 2">Europa</span>
-            <span class="col-1 select-planet" @click="current = 3">Titan</span>
+            <span
+              v-for="(destination, index) in destinations"
+              :key="index"
+              class="col-1 select-planet"
+              :class="{ 'current-planet': current == index }"
+              @click="current = index"
+              >{{ destination.name }}</span
+            >
           </div>
           <div class="text-section w-75 my-5">
             <h1 class="my-5">{{ destinations[current].name }}</h1>
@@ -72,5 +76,9 @@ export default {
 }
 .select-planet {
   cursor: pointer;
+  margin: 0 10px;
+}
+.current-planet {
+  border-bottom: 1px solid white;
 }
 </style>

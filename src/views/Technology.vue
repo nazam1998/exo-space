@@ -11,9 +11,15 @@
           <h2>03 Space Launch 101</h2>
           <div class="row justify-content-center mt-5">
             <div class="col-6 mx-auto text-center">
-              <div class="select-planet" @click="current = 0"><p>0</p></div>
-              <div class="select-planet" @click="current = 1"><p>1</p></div>
-              <div class="select-planet" @click="current = 2"><p>2</p></div>
+              <div
+                v-for="(techno, index) in technology"
+                :key="index"
+                class="select-planet"
+                :class="{ 'current-active': current == index }"
+                @click="current = index"
+              >
+                <p>{{ index }}</p>
+              </div>
             </div>
             <div class="col-6">
               <p>{{ technology[current].description }}</p>
@@ -69,10 +75,11 @@ export default {
   border: 1px solid #fff;
   border-radius: 50%;
 }
-.select-planet p{
-    margin-top: 10px
+.select-planet p {
+  margin-top: 10px;
 }
-.current-techno-img{
-    
+.current-active {
+  background: white;
+  color: black;
 }
 </style>
