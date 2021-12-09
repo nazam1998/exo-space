@@ -56,7 +56,21 @@ const routes = [{
   {
     path: '/technology',
     name: 'Technology',
-    component: () => import( /* webpackChunkName: "technology" */ '../views/Technology.vue')
+    component: () => import( /* webpackChunkName: "technology" */ '../views/Technology.vue'),
+    redirect: {
+      name: 'TechnologyDetails',
+      params: {
+        technoId: 1
+      },
+    },
+    children: [{
+        path: ':technoId',
+        name: 'TechnologyDetails',
+        component: () => import( /* webpackChunkName: "technodetails" */ '../views/TechnologyDetails.vue'),
+        props: true
+      },
+
+    ]
   },
 ]
 

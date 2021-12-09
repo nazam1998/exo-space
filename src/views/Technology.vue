@@ -6,31 +6,26 @@
       alt=""
     />
     <div class="section-technology">
-      <div class="row">
-        <div class="col-6">
-          <h2>03 Space Launch 101</h2>
+      <h2 class="text-start mx-5">03 Space Launch 101</h2>
+      <div class="row align-items-center">
+        <div class="col-3">
           <div
-            v-for="(techno, index) in technology"
-            :key="index"
-            class="select-planet"
-            :class="{ 'current-active': current == index }"
-            @click="current = index"
+            class="select-techno"
+            v-for="techno in technology"
+            :key="techno.id"
+            :class="{ 'current-active': $route.params.technoId == techno.id }"
           >
-            <p>{{ index }}</p>
-          </div>
-          <div class="row justify-content-center mt-5">
-            <div class="col-6 mx-auto text-center"></div>
-            <div class="col-6">
-              <p>{{ technology[current].description }}</p>
-            </div>
+            <router-link
+              :to="{
+                name: 'TechnologyDetails',
+                params: { technoId: techno.id },
+              }"
+            >
+              <p>{{ techno.id }}</p>
+            </router-link>
           </div>
         </div>
-        <div class="col-6 img-fluid current-techno-img">
-          <img
-            :src="require('@/assets' + technology[current].images.portrait)"
-            alt=""
-          />
-        </div>
+        <router-view :key="$route.path" />
       </div>
     </div>
   </div>
@@ -43,7 +38,6 @@ export default {
   name: "Home",
   data() {
     return {
-      current: 0,
       technology: store.technology,
     };
   },
@@ -63,22 +57,28 @@ export default {
   z-index: -1;
 }
 .section-technology {
-  margin-top: 200px;
+  margin-top: 160px;
   color: white;
 }
-.select-planet {
-  cursor: pointer;
-  margin: 10px auto;
+.select-techno {
   height: 50px;
+  border: 1px solid white;
   width: 50px;
-  border: 1px solid #fff;
   border-radius: 50%;
+  margin: auto;
+  margin-top: 20px;
+  padding-top: 10px;
 }
-.select-planet p {
-  margin-top: 10px;
+.select-techno a {
+  text-decoration: none;
+  color: white;
 }
+
 .current-active {
   background: white;
+  border: none;
+}
+.current-active a {
   color: black;
 }
 </style>
