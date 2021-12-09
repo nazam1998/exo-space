@@ -11,13 +11,47 @@ const routes = [{
   },
   {
     path: '/destination',
-    name: 'Destination',
-    component: () => import( /* webpackChunkName: "destinations" */ '../views/Destination.vue')
+    component: () => import( /* webpackChunkName: "destinations" */ '../views/Destination.vue'),
+    props: true,
+
+    children: [{
+        name: 'Destination',
+        path: '',
+        redirect: {
+          name: 'DestinationDetails',
+          params: {
+            destinationId: 1
+          },
+        },
+      },
+
+      {
+        path: ':destinationId',
+        name: 'DestinationDetails',
+        component: () => import( /* webpackChunkName: "destinationdetails" */ '../views/DestinationDetails.vue'),
+        props: true
+      },
+
+    ]
   },
   {
     path: '/crew',
     name: 'Crew',
-    component: () => import( /* webpackChunkName: "crew" */ '../views/Crew.vue')
+    component: () => import( /* webpackChunkName: "crew" */ '../views/Crew.vue'),
+    redirect: {
+      name: 'CrewDetails',
+      params: {
+        crewId: 1
+      },
+    },
+    children: [{
+        path: ':crewId',
+        name: 'CrewDetails',
+        component: () => import( /* webpackChunkName: "crewdetails" */ '../views/CrewDetails.vue'),
+        props: true
+      },
+
+    ]
   },
   {
     path: '/technology',
@@ -27,6 +61,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

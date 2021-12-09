@@ -6,41 +6,24 @@
       alt=""
     />
     <div class="section-destination">
-      <div class="row">
-        <div class="col-6">
-          <h2>01 Pick your destination</h2>
-          <img
-            :src="require('@/assets' + destinations[current].images.png)"
-            alt=""
-          />
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <span
-              v-for="(destination, index) in destinations"
-              :key="index"
-              class="col-1 select-planet"
-              :class="{ 'current-planet': current == index }"
-              @click="current = index"
-              >{{ destination.name }}</span
-            >
-          </div>
-          <div class="text-section w-75 my-5">
-            <h1 class="my-5">{{ destinations[current].name }}</h1>
-            <p>{{ destinations[current].description }}</p>
-          </div>
-          <div class="row">
-            <div class="col-4">
-              AVG. Distance
-              <p>{{ destinations[current].distance }}</p>
-            </div>
-            <div class="col-4">
-              EST. Travel Time
-              <p>{{ destinations[current].travel }}</p>
-            </div>
-          </div>
+      <div class="row justify-content-end">
+        <div class="col-7">
+          <router-link
+            :to="{
+              name: 'DestinationDetails',
+              params: { destinationId: elem.id },
+            }"
+            v-for="elem in destinations"
+            :key="elem.id"
+            class="col-1 select-planet"
+            :class="{
+              'current-planet': $route.params.destinationId == elem.id,
+            }"
+            >{{ elem.name }}</router-link
+          >
         </div>
       </div>
+      <router-view :key="$route.path"></router-view>
     </div>
   </div>
 </template>
@@ -52,7 +35,6 @@ export default {
   name: "Home",
   data() {
     return {
-      current: 0,
       destinations: store.destinations,
     };
   },
@@ -77,8 +59,12 @@ export default {
 .select-planet {
   cursor: pointer;
   margin: 0 10px;
+  color: white;
+  text-decoration: none;
 }
 .current-planet {
   border-bottom: 1px solid white;
+}
+.current-planet {
 }
 </style>

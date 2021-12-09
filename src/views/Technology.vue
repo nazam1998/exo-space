@@ -9,18 +9,17 @@
       <div class="row">
         <div class="col-6">
           <h2>03 Space Launch 101</h2>
+          <div
+            v-for="(techno, index) in technology"
+            :key="index"
+            class="select-planet"
+            :class="{ 'current-active': current == index }"
+            @click="current = index"
+          >
+            <p>{{ index }}</p>
+          </div>
           <div class="row justify-content-center mt-5">
-            <div class="col-6 mx-auto text-center">
-              <div
-                v-for="(techno, index) in technology"
-                :key="index"
-                class="select-planet"
-                :class="{ 'current-active': current == index }"
-                @click="current = index"
-              >
-                <p>{{ index }}</p>
-              </div>
-            </div>
+            <div class="col-6 mx-auto text-center"></div>
             <div class="col-6">
               <p>{{ technology[current].description }}</p>
             </div>
